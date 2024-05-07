@@ -1,0 +1,14 @@
+database:
+  user: 'your_user'
+  password: 'your_pass'
+  host: 'your_host'
+  database: 'your_database'
+
+telegram:
+  token: 'token_from_tg'
+
+minio:
+  endpoint: "your_host:port"
+  access_key: "your_login"
+  secret_key: "your_pass"
+  bucket_name: "your_bucket_name"

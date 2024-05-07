@@ -1,8 +1,8 @@
 Telegram bot "Tamogochi" EN
 =======================
 
-Tamogochi
-'s Telegram bot is an interactive bot that helps users take care of a virtual pet,
+
+Telegram bot "Tamogochi" is an interactive bot that helps users take care of a virtual pet,
 providing a gaming experience and entertainment.
 
 ## Installation

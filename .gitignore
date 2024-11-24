@@ -1,8 +1,13 @@
 #Cache
 __pycache__/
 *.pyc
+
 #venv
 venv/
 images/
+
 #config
 config1.yaml
+
+#idea
+.idea

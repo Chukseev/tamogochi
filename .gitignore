@@ -11,3 +11,5 @@ config1.yaml
 
 #idea
 .idea/
+
+.env

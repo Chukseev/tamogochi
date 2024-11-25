@@ -1,21 +1,26 @@
-import telebot
-from telebot import types
+from telebot import TeleBot, types
+from dotenv import load_dotenv
+import os
 import time
 import threading
 import schedule
-import yaml
-from working_in_the_db import (insert_user, insert_pet, insert_inventory, cheking_pet, select_pet,
-                               feed_pet, cheking_user, select_inventory, select_balance, update_satiety_and_mood)
+from working_in_the_db import (
+    insert_user, insert_pet, insert_inventory, cheking_pet, select_pet,
+    feed_pet, cheking_user, select_inventory, select_balance, update_satiety_and_mood
+)
 import working_in_the_minio as h
 
-with open('config1.yaml', 'r') as file:
-    config = yaml.safe_load(file)
+# Загружаем переменные окружения из .env
+load_dotenv()
 
-telegram = config['telegram']
+# Чтение токена Telegram из переменных окружения
+TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
+if not TELEGRAM_TOKEN:
+    raise ValueError("Токен Telegram не найден в .env файле")
 
-bot = telebot.TeleBot(telegram['token'])
+bot = TeleBot(TELEGRAM_TOKEN)
 
-
+# Ваши команды и функции
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
     if cheking_user(message.from_user.id):
@@ -23,7 +28,7 @@ def send_welcome(message):
     else:
         insert_user(message.from_user.id, message.from_user.first_name, message.from_user.last_name,
                     message.from_user.username)
-        bot.reply_to(message, f"Привет,{message.from_user.first_name}")
+        bot.reply_to(message, f"Привет, {message.from_user.first_name}")
         bot.send_message(message.chat.id, '/create_pet - Создать питомца')
 
 
@@ -162,7 +167,7 @@ def bot_polling():
 
 # Запуск бота и проверки расписания в отдельных потоках
 if __name__ == "__main__":
-    schedule_thread = threading.Thread(target=check_schedule)
-    bot_thread = threading.Thread(target=bot_polling)
+    schedule_thread = threading.Thread(target=lambda: schedule.run_pending())
+    bot_thread = threading.Thread(target=lambda: bot.infinity_polling())
     schedule_thread.start()
     bot_thread.start()

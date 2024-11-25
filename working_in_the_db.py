@@ -1,7 +1,9 @@
 from sqlalchemy import create_engine, select, and_, Table, Column, Integer, String, MetaData, ForeignKey
 from dotenv import load_dotenv
 import os
+import time
 
+time.sleep(10)
 # Загружаем переменные окружения из .env
 load_dotenv()
 

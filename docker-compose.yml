@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  minio:
+    image: quay.io/minio/minio
+    container_name: minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY}
+    volumes:
+      - /path/to/data:/data
+      - /path/to/config:/root/.minio
+    command: server /data --console-address ":9001"
+    networks:
+      - app_network
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - /path/to/data:/var/lib/mysql
+    networks:
+      - app_network
+
+  app1:
+    build:
+      context: .
+    container_name: working_in_the_db
+    command: python working_in_the_db.py
+    depends_on:
+      - mysql
+    networks:
+      - app_network
+
+  app2:
+    build:
+      context: .
+    container_name: tg_bot
+    command: python tg_bot.py
+    depends_on:
+      - mysql
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge

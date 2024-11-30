@@ -6,48 +6,58 @@ Telegram bot "Tamogochi" is an interactive bot that helps users take care of a v
 providing a gaming experience and entertainment.
 
 ## Installation
-1. **Cloning the repository**
+### 1. **Cloning the repository**
 
 First, clone the repository to your computer:
 
 ```
-git clone https://github.com/Сhukseev/tamogochi.git
+git clone git@github.com:Chukseev/tamogochi.git
 ```
 
-2. **Installing dependencies**
+### 2. **Setting up the environments**
 
-Install dependencies in the current project using requirements.txt
-
-```
-pip install -r requirements.txt
-```
-3. **Installation of the MYSQL server**
-
-Download link - [mysql](https://dev.mysql.com/downloads/installer /)
-
-
-4. **Server Installation min.io**
-
-Download link - [min.io ](https://min.io/download ?license=agpl&platform=kubernetes)
-
-Select your OS and install,installation instructions min.io presented on the website
-
-## Before use
-1. **Setting up min.io**
-
-Before launching the telegram bot, in min.io create a "bucket" and upload [images](https://disk .yandex.ru/d/E2GtgX7sRrSAiw ) accordingly into it
-
-2. **mysql Configuration**
-
-Create a tamogochi database
+Copy the file .env_test to the .env file
 
 ```
-CREATE DATABASE tamogochi;
+cp .env_test .env
 ```
-3. **Write to config.yaml**
+Next, you need to specify the configuration. It is recommended to install DB_USER by any user except root, DB_HOST install mysql, so that there would be no conflicts with your mysql on the host system and also with the port.
+```
+DB_USER=youruser
+DB_PASSWORD=yourpassword
+DB_HOST=mysql
+DB_PORT=3307
+DB_NAME=tamogochi
 
-Write all your configs to the config.yaml file
+MINIO_ENDPOINT=localhost:9001
+MINIO_ACCESS_KEY=minioadmin
+MINIO_SECRET_KEY=minioadmin
+MINIO_BUCKET_NAME=mybucket
 
+TELEGRAM_TOKEN=token
+```
+### 3. **Docker Compose**
+ Collecting all the images
+
+```
+docker compose up --build -d 
+```
+ 
+
+### 4. **Setting min.io**
+1. Download images for the bot - [images](https://disk.yandex.ru/d/E2GtgX7sRrSAiw)
+
+2. Log in to the mini.io web app, MINIO_ACCESS_KEY - login,
+MINIO_SECRET_KEY - password.
+![img](https://i.imgur.com/5a8SK4q.png)
+
+3. Create the bucket.
+![img](https://imgur.com/ZBaaD9D.png)
+
+4. Select public acces policy.
+![img](https://imgur.com/wlyAwPo.png)
+5.Unzip the downloaded archive and upload the files to bucket.
+![img](https://imgur.com/awCNFj9.png)
 ## Usage
 
 1. **Commands**
@@ -66,47 +76,60 @@ Write all your configs to the config.yaml file
 обеспечивая игровой опыт и развлечения.
 
 ## Установка
-1. **Клонирование репозитория**
+### 1. **Клонирование репозитория**
 
-    Сначала склонируйте репозиторий на ваш компьютер: 
-
-    ```
-    git clone https://github.com/Сhukseev/tamogochi.git
-    ```
-   
-2. **Установка зависимостей**
-
-    Установите зависимости в текущий проект с помощью requirements.txt
+   Сначала склонируйте репозиторий на ваш компьютер: 
 
     ```
-    pip install -r requirements.txt
+    git clone git@github.com:Chukseev/tamogochi.git
     ```
-3. **Установка сервера MYSQL**
-
-   Ссылка для скачивания - [mysql](https://dev.mysql.com/downloads/installer/)
-
-
-4. **Установка сервера min.io**
    
-   Ссылка для скачивания - [min.io](https://min.io/download?license=agpl&platform=kubernetes)
+### 2. **Установка зависимостей**
 
-   Выберите ваш OS и установите,инструкция по установке min.io представлена на сайте
+   Cкопируйте файл .env_test в файл .env
 
-## Перед использованием
-1. **Настройка min.io**
-   
-   Перед запуском телеграм бота,в min.io создайте "bucket" и загрузите [изображения](https://disk.yandex.ru/d/E2GtgX7sRrSAiw) соответсвенно в него
-
-2. **Настройка mysql**
-
-   Создайте базу данных tamogochi
-   
+    ```
+    cp .env_test .env
+    ```
+   Далее нужно указать конфигурацию. Рекомендуется установить DB_USER любым пользователем кроме root,  DB_HOST установить mysql,что бы не было конфликтов с вашим mysql на хост системе и также с портом.
+    
    ```
-   CREATE DATABASE tamogochi;
-   ```
-3. **Запись в config.yaml**
+   DB_USER=youruser
+   DB_PASSWORD=yourpassword
+   DB_HOST=mysql
+   DB_PORT=3307
+   DB_NAME=tamogochi
 
-   Запишите все свои конфиги в файл config.yaml
+   MINIO_ENDPOINT=localhost:9001
+   MINIO_ACCESS_KEY=minioadmin
+   MINIO_SECRET_KEY=minioadmin
+   MINIO_BUCKET_NAME=mybucket
+
+   TELEGRAM_TOKEN=token
+   ```
+    
+### 3. **Docker Compose**
+   Собираем все образы
+
+  ```
+docker compose up --build -d 
+```
+
+
+### 4. **Настройка min.io**
+1. Загрузите изображения для бота - [images](https://disk.yandex.ru/d/E2GtgX7sRrSAiw)
+
+2. Авторизируйтесь в mini.io веб приложении , MINIO_ACCESS_KEY - логин,
+MINIO_SECRET_KEY - пароль.
+![img](https://i.imgur.com/5a8SK4q.png)
+
+3. Создайте bucket.
+![img](https://imgur.com/ZBaaD9D.png)
+
+4. Выберите публичный доступ.
+![img](https://imgur.com/wlyAwPo.png)
+5.Разархивируйте ранее скачанный архив и загрузите его в bucket.
+![img](https://imgur.com/awCNFj9.png)
 
 ## Использование 
 

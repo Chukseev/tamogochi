@@ -80,17 +80,17 @@ MINIO_SECRET_KEY - password.
 
    Сначала склонируйте репозиторий на ваш компьютер: 
 
-    ```
-    git clone git@github.com:Chukseev/tamogochi.git
-    ```
+   ```
+   git clone git@github.com:Chukseev/tamogochi.git
+   ```
    
 ### 2. **Установка зависимостей**
 
    Cкопируйте файл .env_test в файл .env
 
-    ```
-    cp .env_test .env
-    ```
+   ```
+   cp .env_test .env
+   ```
    Далее нужно указать конфигурацию. Рекомендуется установить DB_USER любым пользователем кроме root,  DB_HOST установить mysql,что бы не было конфликтов с вашим mysql на хост системе и также с портом.
     
    ```
@@ -111,7 +111,7 @@ MINIO_SECRET_KEY - password.
 ### 3. **Docker Compose**
    Собираем все образы
 
-  ```
+```
 docker compose up --build -d 
 ```
 
